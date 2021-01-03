@@ -1,4 +1,4 @@
-package com.company.mysql;
+package com.company;
 
 
 import java.sql.Connection;
@@ -11,13 +11,13 @@ public class ConnectionHelper
     private static ConnectionHelper instance;
     private ConnectionHelper() {}
 
-    public static Connection getConnection(String connectionUrl) throws SQLException {
+    public static Connection getConnection(String connectionUrl, String username, String password) throws SQLException {
         url = connectionUrl;
         if (instance == null) { //singleton
             instance = new ConnectionHelper();
         }
         try {
-            return DriverManager.getConnection(instance.url, "root","123");
+            return DriverManager.getConnection(instance.url, username,password);
         } catch (SQLException e) {
             throw e;
         }

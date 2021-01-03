@@ -10,11 +10,16 @@ public class Main {
 
 
         System.out.println("MYSQL:");
-        MySqlProfiler mysql = new MySqlProfiler();
+        MySqlProfiler mysql = new MySqlProfiler("root","123");
         mysql.query("test", "Select * from testtable;");
+        mysql.closeConnection();
+
         System.out.println("POSTGRES:");
-        PostgresProfiler postgres = new PostgresProfiler();
-        postgres.connect();
+        PostgresProfiler postgres = new PostgresProfiler("jdbc:postgresql://localhost:52/tttest","postgres","123");
+        postgres.query("tttest","SELECT * FROM pionki");
+        postgres.closeConnection();
+
+
         System.out.println("MONGODB:");
         MongoDbProfiler mongodb = new MongoDbProfiler();
         mongodb.connect();

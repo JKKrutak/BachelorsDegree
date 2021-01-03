@@ -13,6 +13,12 @@ import java.sql.Statement;
 import java.util.Iterator;
 
 public class MongoDbProfiler {
+
+    public MongoDbProfiler(){
+
+    }
+
+
     public void connect() throws Exception {
         Connection c = null;
         try
