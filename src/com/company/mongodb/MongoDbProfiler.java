@@ -1,44 +1,53 @@
 package com.company.mongodb;
 
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
+import com.company.ConnectionHelper;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Iterator;
 
 public class MongoDbProfiler {
+    private Connection connection = null;
 
-    public MongoDbProfiler(){
-
+    public MongoDbProfiler(String url, String username, String password){
+        try {
+            Class.forName(url);
+            //connection = ConnectionHelper.getConnection("jdbc:mysql://localhost:50", username, password);
+            connection = ConnectionHelper.getConnection(url, username, password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
-
-    public void connect() throws Exception {
-        Connection c = null;
+/*
+    public void connect(String url, String database, String username, String password) throws Exception {
         try
         {
-            MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:53"));
-            MongoDatabase database = mongoClient.getDatabase("pionki");
-            MongoCollection collection = database.getCollection("user");
-
-            Iterator it = collection.find().iterator();
-
-            while(it.hasNext()) {
-                System.out.println(it.next());
-            }
-
-
+            Class.forName(url);
+            connection = ConnectionHelper.getConnection(url, username, password);
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+
+    }*/
+    public void query(String database, String query) throws Exception {
+        try {
+            Statement stm = connection.createStatement();
+            stm.executeQuery("use "+database);
+            ResultSet rs = stm.executeQuery(query);
+
+            while (rs.next()) {
+                System.out.println(rs.getString(1));
+                System.out.println(rs.getString(2));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void closeConnection() {
 
     }
 }
