@@ -1,6 +1,9 @@
 package com.company.postgres;
 
 import com.company.ConnectionHelper;
+import com.company.model.DataSet;
+import com.company.model.MySqlQueryCreator;
+import com.company.mysql.MySqlProfiler;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,17 +16,16 @@ public class PostgresProfiler {
             connection =  ConnectionHelper.getConnection(url,username, password);
     }
 
-    public void query(String database, String query) throws Exception {
-
+    public void insert(DataSet dataSet, String tableName) throws Exception {
+        MySqlQueryCreator query = new MySqlQueryCreator();
+        try {
             Statement stm = connection.createStatement();
-            //stm.executeQuery("use "+database+";");
-            ResultSet rs = stm.executeQuery(query);
-
-            while (rs.next()) {
-                System.out.println(rs.getString(1));
-                System.out.println(rs.getString(2));
-            }
+            //System.out.println(query);
+            stm.execute(query.mySqlInsert(dataSet,tableName));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
 
     public void closeConnection() throws Exception{
         connection.close();

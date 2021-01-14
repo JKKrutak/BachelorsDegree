@@ -1,12 +1,15 @@
 package com.company.mysql;
 
 import com.company.ConnectionHelper;
+import com.company.Profiler;
+import com.company.model.DataSet;
+import com.company.model.MySqlQueryCreator;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class MySqlProfiler {
+public class MySqlProfiler implements Profiler {
     private Connection connection = null;
 
     public MySqlProfiler(String url, String username, String password){
@@ -19,20 +22,13 @@ public class MySqlProfiler {
         }
     }
 
-    public void query(String database, String query) throws Exception {
+    @Override
+    public void insert(DataSet dataSet, String tableName) {
         try {
+            MySqlQueryCreator query = new MySqlQueryCreator();
             Statement stm = connection.createStatement();
-
-            stm.execute("use "+database);
-            System.out.println(query);
-            stm.execute(query);
-            //ResultSet rs = stm.executeQuery(query);
-
-           // while (rs.next()) {
-              //  System.out.println(rs.getString(1));
-             //   System.out.println(rs.getString(2));
-          //  }
-
+            stm.execute("use people");
+            stm.execute(query.mySqlInsert(dataSet,tableName));
         } catch (Exception e) {
             e.printStackTrace();
         }
