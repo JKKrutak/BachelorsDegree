@@ -1,4 +1,4 @@
-package com.company.mysql;
+package com.company.db.mysql;
 
 import com.company.ConnectionHelper;
 import com.company.Profiler;
@@ -6,7 +6,6 @@ import com.company.model.DataSet;
 import com.company.model.MySqlQueryCreator;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class MySqlProfiler implements Profiler {

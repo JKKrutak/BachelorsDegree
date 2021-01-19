@@ -30,4 +30,37 @@ $ docker exec -it Mongo bash # Mongo is our container name
 $ mongo
 > use db; # We are into our database named db now.
 ```
+
+
+# Couch DB
+
+## How to get into your database in docker
+
+Just type http://127.0.0.1:5984/_utils/#login - localhost- in your web browser, and login.
  
+# Cassandra:
+
+## How to get into your database in docker
+
+Default password is "cassandra"
+
+Start by creating network:
+
+`$ docker network create some-network`
+then:
+
+```
+$ docker run --name x --network some-network -d cassandra:latest #x is your container name
+```
+Create another container dedicated for executing Cassandra Query Language Shell 
+
+```
+$ dock r run --name my-cassandra-1 --network some-network -d -e CASSANDRA_SEEDS=cassandra cassandra:latest
+$ docker run -it --rm --network some-network cassandra:latest cqlsh x #x is your container name
+```
+
+# TODO:
+
+
+- [ ] Add performance measurement for other queries (Update, Delete all)
+- [ ] Try to add some new database 

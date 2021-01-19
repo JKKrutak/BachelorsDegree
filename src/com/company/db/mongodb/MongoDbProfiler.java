@@ -1,20 +1,13 @@
-package com.company.mongodb;
+package com.company.db.mongodb;
 
-import com.company.ConnectionHelper;
 import com.company.Profiler;
 import com.company.model.DataSet;
-import com.company.model.MySqlQueryCreator;
 import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mysql.cj.protocol.a.MysqlBinaryValueDecoder;
 import org.bson.Document;
 
 
-import javax.print.Doc;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;

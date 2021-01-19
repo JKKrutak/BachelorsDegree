@@ -1,12 +1,10 @@
-package com.company.postgres;
+package com.company.db.postgres;
 
 import com.company.ConnectionHelper;
 import com.company.model.DataSet;
 import com.company.model.MySqlQueryCreator;
-import com.company.mysql.MySqlProfiler;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class PostgresProfiler {

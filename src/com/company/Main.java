@@ -1,8 +1,5 @@
 package com.company;
-import com.company.mongodb.MongoDbProfiler;
-import com.company.mysql.MySqlProfiler;
-import com.company.postgres.PostgresProfiler;
-import com.company.couchdb.CouchDbProfiler;
+import com.company.db.cassandra.CassandraProfiler;
 import com.company.model.DataSet;
 import com.company.model.MySqlQueryCreator;
 
@@ -11,7 +8,7 @@ import java.lang.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        int dataSetSize = 50;
+        int dataSetSize = 120;
         DataSet dataSet = new DataSet(dataSetSize);
 
         long start;
@@ -21,7 +18,7 @@ public class Main {
         MySqlQueryCreator newQuery = new MySqlQueryCreator();
 
 
-
+/*
         System.out.println("MYSQL:");
         MySqlProfiler mysql = new MySqlProfiler("jdbc:mysql://localhost:50","root","123"); //Połącznie
       //System.out.println(newQuery.mySqlInsert(1000,"people_info")); //Wypisanie całej query
@@ -50,7 +47,16 @@ public class Main {
         elapsedTime = (end-start)/1000000;
         System.out.println("MongoDB czas na wykonanie "+dataSetSize+" wpisów: "+elapsedTime+"ms");
 
-       // CouchDbProfiler couchDb = new CouchDbProfiler("http://admin:123@localhost:5984" , "pionki");
+
+        CouchDbProfiler couchDb = new CouchDbProfiler("http://admin:123@localhost:5984" , "pionki");
+        couchDb.insert(dataSet,"");
+
+ */
+
+        CassandraProfiler cassandra = new CassandraProfiler("",9042);
+        cassandra.insert(dataSet,"people_info");
+
+
 
 
     }
