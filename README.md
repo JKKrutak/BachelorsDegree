@@ -79,6 +79,16 @@ $ dock r run --name my-cassandra-1 --network some-network -d -e CASSANDRA_SEEDS=
 $ docker run -it --rm --network some-network cassandra:latest cqlsh x #x is your container name
 ```
 
+# Derby
+
+## Docker setup
+
+```
+$ docker pull az82/docker-derby
+$ sudo docker run -d -p 1527:1527 -e ADAUTH="true" -e ADNAME="example.local" -e BASEDN="dc=example,dc=local" -e SHOWUSER="ADUser" -e SHOWPASS="ADUserPass" -e ADMINGROUP="Schema-Admins,IT,etc" -e LOGINGROUP="ADTest,Domains-User" -v /dbs:/dbs --name derby -t az82/docker-derby  
+
+```
+
 # TODO:
 
 
