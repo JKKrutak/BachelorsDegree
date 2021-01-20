@@ -1,9 +1,8 @@
 package com.company;
-import com.company.db.cassandra.CassandraProfiler;
+
+import com.company.db.mysql.MySqlProfiler;
 import com.company.model.DataSet;
 import com.company.model.MySqlQueryCreator;
-
-import java.lang.*;
 
 
 public class Main {
@@ -18,9 +17,9 @@ public class Main {
         MySqlQueryCreator newQuery = new MySqlQueryCreator();
 
 
-/*
+
         System.out.println("MYSQL:");
-        MySqlProfiler mysql = new MySqlProfiler("jdbc:mysql://localhost:50","root","123"); //Połącznie
+        MySqlProfiler mysql = new MySqlProfiler("jdbc:mysql://localhost:3308","root","123"); //Połącznie
       //System.out.println(newQuery.mySqlInsert(1000,"people_info")); //Wypisanie całej query
         start = System.nanoTime();
         mysql.insert(dataSet,"people_info"); //100k jest za dużo jak coś xD ale do 50k jest okxD
@@ -29,6 +28,7 @@ public class Main {
         System.out.println("MySQL czas wykonanie "+dataSetSize+" wpisów: "+elapsedTime+"ms");
 
 
+/*
         System.out.println("POSTGRES:");
         PostgresProfiler postgres = new PostgresProfiler("jdbc:postgresql://localhost:52/people","postgres","123");
         start = System.nanoTime();
@@ -51,12 +51,12 @@ public class Main {
         CouchDbProfiler couchDb = new CouchDbProfiler("http://admin:123@localhost:5984" , "pionki");
         couchDb.insert(dataSet,"");
 
- */
+
 
         CassandraProfiler cassandra = new CassandraProfiler("",9042);
         cassandra.insert(dataSet,"people_info");
 
-
+*/
 
 
     }

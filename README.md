@@ -3,7 +3,10 @@
 ## How to get into your database in docker
 
 ```
+$ create table people_info ( id int auto_increment not null primary key, name varchar(30) not null, secondname varchar(30) not null, age int not null, state varchar(30) not null);
 $ docker exec -it MySQL mysql -uroot -p # password: 123, MySQL is our container name
+$ docker run --name=MySQL -e MYSQL_ROOT_PASSWORD=123 -d mysql/mysql-server:latest
+$ docker run -e MYSQL_ROOT_PASSWORD=password -d -p 3308:3306 mysql
 ```
 
 # Postgres
@@ -14,6 +17,8 @@ If you don’t specify the PGUSER environment variable, then psql will assume yo
 
 You’ll need to either call psql with the `-U Postgres` flag, or `su - Postgres` first
 ```
+$ docker start --name dazzling_goodall 
+$ docker exec -> żeby wejść w tego mysqla śmiesznego
 $ psql -U Postgres #-U = User
 $ psql -h localhost -p 52 -U postgres -W
 //or
@@ -64,3 +69,4 @@ $ docker run -it --rm --network some-network cassandra:latest cqlsh x #x is your
 
 - [ ] Add performance measurement for other queries (Update, Delete all)
 - [ ] Try to add some new database 
+- [ ] Dorobić reszte 
