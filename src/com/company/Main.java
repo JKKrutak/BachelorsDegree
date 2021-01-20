@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.db.cassandra.CassandraProfiler;
 import com.company.db.couchdb.CouchDbProfiler;
+import com.company.db.derby.DerbyProfiler;
 import com.company.db.mongodb.MongoDbProfiler;
 import com.company.db.mysql.MySqlProfiler;
 import com.company.db.postgres.PostgresProfiler;
@@ -56,15 +57,18 @@ public class Main {
         CouchDbProfiler couchDb = new CouchDbProfiler("http://admin:123@localhost:5984" , "people");
         couchDb.insert(dataSet,"");
 
-*/
+
+
 
         CassandraProfiler cassandra = new CassandraProfiler("localhost",9042);
         //CqlsQueryCreator kwerenda = new CqlsQueryCreator();
         //System.out.println(kwerenda.cqlsInsert(dataSet,"people_info"));
         //System.out.println();
         cassandra.insert(dataSet,"people_info");
-
-
+*/
+        DerbyProfiler derby = new DerbyProfiler();
+        derby.insert(dataSet, "people_info");
+        derby.select("people_info");
 
 
     }

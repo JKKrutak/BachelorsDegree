@@ -7,7 +7,7 @@ public class MySqlQueryCreator {
         int amountOfData = dataSet.getSize();
         query = "INSERT INTO "
                 +tableName+
-                " (name, secondname, age, state) VALUES";
+                " (name, secondname, age, state) VALUES ";
 
         for(int i = 0; i < amountOfData; i++) {
             query = query + "('" + dataSet.getRandomNames()[i] + "',";
