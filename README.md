@@ -17,12 +17,22 @@ If you don’t specify the PGUSER environment variable, then psql will assume yo
 
 You’ll need to either call psql with the `-U Postgres` flag, or `su - Postgres` first
 ```
-$ docker start --name dazzling_goodall 
-$ docker exec -> żeby wejść w tego mysqla śmiesznego
+$ docker start --name dazzling_goodall #dazzling_goodall is your container name
+$ docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=123 -d postgres
+$ docker exec -it postgres bash --open bash in your container 
 $ psql -U Postgres #-U = User
 $ psql -h localhost -p 52 -U postgres -W
 //or
 $ psql -d test -U postgres #better use this # test is our database name
+
+psql# /c databasename -- connect to database
+people=#            
+    create table people_info(
+    id serial primary key,
+    name varchar(30),
+    secondname varchar(30),
+    age int,
+    state varchar(30));
 ```
 In Postgres you are connecting to your Database immediately
 

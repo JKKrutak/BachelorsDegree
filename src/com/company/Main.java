@@ -1,6 +1,8 @@
 package com.company;
 
+import com.company.db.mongodb.MongoDbProfiler;
 import com.company.db.mysql.MySqlProfiler;
+import com.company.db.postgres.PostgresProfiler;
 import com.company.model.DataSet;
 import com.company.model.MySqlQueryCreator;
 
@@ -16,7 +18,7 @@ public class Main {
 
         MySqlQueryCreator newQuery = new MySqlQueryCreator();
 
-
+/*
 
         System.out.println("MYSQL:");
         MySqlProfiler mysql = new MySqlProfiler("jdbc:mysql://localhost:3308","root","123"); //Połącznie
@@ -28,25 +30,25 @@ public class Main {
         System.out.println("MySQL czas wykonanie "+dataSetSize+" wpisów: "+elapsedTime+"ms");
 
 
-/*
+
         System.out.println("POSTGRES:");
-        PostgresProfiler postgres = new PostgresProfiler("jdbc:postgresql://localhost:52/people","postgres","123");
+        PostgresProfiler postgres = new PostgresProfiler("jdbc:postgresql://localhost:5432/people","postgres","123");
         start = System.nanoTime();
         postgres.insert(dataSet,"people_info"); //100k jest za dużo jak coś xD ale do 50k jest ok
         end = System.nanoTime();
         elapsedTime = (end-start)/1000000;
         System.out.println("Postgres czas na wykonanie "+dataSetSize+" wpisów: "+elapsedTime+"ms");
         postgres.closeConnection();
-
+*/
 
         System.out.println("MONGODB:");
         MongoDbProfiler mongodb = new MongoDbProfiler();  //"jdbc:mongodb://localhost:53/pionki","user","123");
         start = System.nanoTime();
-        mongodb.insert(dataSet,"NiematozanczeniaxDDDDDDDDDD");
+        mongodb.insert(dataSet,"");
         end = System.nanoTime();
         elapsedTime = (end-start)/1000000;
         System.out.println("MongoDB czas na wykonanie "+dataSetSize+" wpisów: "+elapsedTime+"ms");
-
+/*
 
         CouchDbProfiler couchDb = new CouchDbProfiler("http://admin:123@localhost:5984" , "pionki");
         couchDb.insert(dataSet,"");
