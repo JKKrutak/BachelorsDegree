@@ -17,15 +17,15 @@ If you don’t specify the PGUSER environment variable, then psql will assume yo
 
 You’ll need to either call psql with the `-U Postgres` flag, or `su - Postgres` first
 ```
-$ docker start --name dazzling_goodall #dazzling_goodall is your container name
 $ docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=123 -d postgres
+$ docker start --name dazzling_goodall #dazzling_goodall is your container name
 $ docker exec -it postgres bash --open bash in your container 
 $ psql -U Postgres #-U = User
 $ psql -h localhost -p 52 -U postgres -W
 //or
 $ psql -d test -U postgres #better use this # test is our database name
 
-psql# /c databasename -- connect to database
+psql# \c databasename -- connect to database
 people=#            
     create table people_info(
     id serial primary key,
@@ -41,9 +41,11 @@ In Postgres you are connecting to your Database immediately
 ## How to get into your database in docker
 
 ```
-$ docker exec -it Mongo bash # Mongo is our container name
+$ docker run -d -p 27017-27019:27017-27019 --name mongodb mongo
+$ docker exec -it mongodb bash # Mongo is our container name
 $ mongo
-> use db; # We are into our database named db now.
+> use people; # We are into our database named db now.
+> 
 ```
 
 
@@ -51,6 +53,9 @@ $ mongo
 
 ## How to get into your database in docker
 
+```
+$ docker run -p 5984:5984 -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=123 -d --name couchdb couchdb
+```
 Just type http://127.0.0.1:5984/_utils/#login - localhost- in your web browser, and login.
  
 # Cassandra:

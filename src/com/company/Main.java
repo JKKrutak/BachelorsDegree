@@ -1,8 +1,11 @@
 package com.company;
 
+import com.company.db.cassandra.CassandraProfiler;
+import com.company.db.couchdb.CouchDbProfiler;
 import com.company.db.mongodb.MongoDbProfiler;
 import com.company.db.mysql.MySqlProfiler;
 import com.company.db.postgres.PostgresProfiler;
+import com.company.model.CqlsQueryCreator;
 import com.company.model.DataSet;
 import com.company.model.MySqlQueryCreator;
 
@@ -39,7 +42,7 @@ public class Main {
         elapsedTime = (end-start)/1000000;
         System.out.println("Postgres czas na wykonanie "+dataSetSize+" wpisów: "+elapsedTime+"ms");
         postgres.closeConnection();
-*/
+
 
         System.out.println("MONGODB:");
         MongoDbProfiler mongodb = new MongoDbProfiler();  //"jdbc:mongodb://localhost:53/pionki","user","123");
@@ -48,17 +51,20 @@ public class Main {
         end = System.nanoTime();
         elapsedTime = (end-start)/1000000;
         System.out.println("MongoDB czas na wykonanie "+dataSetSize+" wpisów: "+elapsedTime+"ms");
-/*
 
-        CouchDbProfiler couchDb = new CouchDbProfiler("http://admin:123@localhost:5984" , "pionki");
+
+        CouchDbProfiler couchDb = new CouchDbProfiler("http://admin:123@localhost:5984" , "people");
         couchDb.insert(dataSet,"");
 
+*/
 
-
-        CassandraProfiler cassandra = new CassandraProfiler("",9042);
+        CassandraProfiler cassandra = new CassandraProfiler("localhost",9042);
+        //CqlsQueryCreator kwerenda = new CqlsQueryCreator();
+        //System.out.println(kwerenda.cqlsInsert(dataSet,"people_info"));
+        //System.out.println();
         cassandra.insert(dataSet,"people_info");
 
-*/
+
 
 
     }

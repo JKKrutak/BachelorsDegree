@@ -2,6 +2,7 @@ package com.company.db.cassandra;
 
 
 import com.company.Profiler;
+import com.company.model.CqlsQueryCreator;
 import com.company.model.DataSet;
 import com.company.model.MySqlQueryCreator;
 
@@ -14,10 +15,10 @@ public class CassandraProfiler implements Profiler {
 
     @Override
     public void insert(DataSet dataSet, String tableName) {
-        String query;
+        String query = new CqlsQueryCreator().cqlsInsert(dataSet, tableName);
         //query = "INSERT INTO people_info (";
-
-        connection.query(new MySqlQueryCreator().mySqlInsert(dataSet,tableName) );
+        System.out.println(query);
+        connection.query(query);
         connection.close();
     }
 

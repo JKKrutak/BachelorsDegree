@@ -18,10 +18,10 @@ public class MongoDbProfiler implements Profiler {
 
     public MongoDbProfiler(){
         try {
-            MongoClient mongoClient = new MongoClient("localhost",53);
-            MongoDatabase database = mongoClient.getDatabase("pionkidwa");
+            MongoClient mongoClient = new MongoClient("localhost",27017);
+            MongoDatabase database = mongoClient.getDatabase("people");
 //            database.createCollection("pionkidwa", null);
-            collection = database.getCollection("pionkidwa");
+            collection = database.getCollection("people_info");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -36,7 +36,7 @@ public class MongoDbProfiler implements Profiler {
         for(int i = 0; i < dataSet.getSize(); i++) {
              Document document = new Document();
              document.put("name", dataSet.getRandomNames()[i]);
-             document.put("surrname", dataSet.getRandomSurrnames()[i]);
+             document.put("secondname", dataSet.getRandomSurrnames()[i]);
              document.put("age", dataSet.getRandomAges()[i]);
              document.put("state", dataSet.getRandomStates()[i]);
 
