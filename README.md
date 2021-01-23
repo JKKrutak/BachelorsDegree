@@ -88,6 +88,7 @@ $ docker run -it --rm --network some-network cassandra:latest cqlsh x #x is your
 $ docker pull az82/docker-derby
 $ sudo docker run -d -p 1527:1527 -e ADAUTH="true" -e ADNAME="example.local" -e BASEDN="dc=example,dc=local" -e SHOWUSER="ADUser" -e SHOWPASS="ADUserPass" -e ADMINGROUP="Schema-Admins,IT,etc" -e LOGINGROUP="ADTest,Domains-User" -v /dbs:/dbs --name derby -t az82/docker-derby  
 $ docker start derby
+
 ```
 
 # TODO:

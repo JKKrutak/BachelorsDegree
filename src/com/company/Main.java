@@ -2,7 +2,7 @@ package com.company;
 
 import com.company.db.cassandra.CassandraProfiler;
 import com.company.db.couchdb.CouchDbProfiler;
-import com.company.db.derby.DerbyProfiler;
+//import com.company.db.derby.DerbyProfiler;
 import com.company.db.mongodb.MongoDbProfiler;
 import com.company.db.mysql.MySqlProfiler;
 import com.company.db.postgres.PostgresProfiler;
@@ -22,7 +22,7 @@ public class Main {
 
         MySqlQueryCreator newQuery = new MySqlQueryCreator();
 
-/*
+
 
         System.out.println("MYSQL:");
         MySqlProfiler mysql = new MySqlProfiler("jdbc:mysql://localhost:3308","root","123"); //Połącznie
@@ -65,11 +65,11 @@ public class Main {
         //System.out.println(kwerenda.cqlsInsert(dataSet,"people_info"));
         //System.out.println();
         cassandra.insert(dataSet,"people_info");
-*/
+/*
         DerbyProfiler derby = new DerbyProfiler();
         derby.insert(dataSet, "people_info");
         derby.select("people_info");
 
-
+*/
     }
 }

@@ -17,9 +17,23 @@ public class CassandraProfiler implements Profiler {
     public void insert(DataSet dataSet, String tableName) {
         String query = new CqlsQueryCreator().cqlsInsert(dataSet, tableName);
         //query = "INSERT INTO people_info (";
-        System.out.println(query);
+        //System.out.println(query);
         connection.query(query);
         connection.close();
+    }
+
+    @Override
+    public void select(String tableName) {
+        connection.query("");
+
+
+    }
+
+    @Override
+    public void delete(String tableName) {
+
+
+
     }
 
 
