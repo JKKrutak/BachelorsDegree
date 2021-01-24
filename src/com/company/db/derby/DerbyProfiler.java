@@ -17,14 +17,14 @@ public class DerbyProfiler implements Profiler {
 
     public DerbyProfiler() throws SQLException {
         createConnection();
-        connection.createStatement().execute("DROP TABLE people_info");
-        connection.createStatement().execute("CREATE TABLE people_info " +
+        //connection.createStatement().execute("DROP TABLE people_info");
+        /*connection.createStatement().execute("CREATE TABLE people_info " +
                 "(" +
                 "name CHAR(120)," +
                 "secondname CHAR(120)," +
                 "age CHAR(120), " +
                 "state CHAR (120)" +
-                ")");
+                ")");*/
     }
 
     @Override
@@ -37,6 +37,28 @@ public class DerbyProfiler implements Profiler {
         } catch (SQLException sqlExcept) {
             sqlExcept.printStackTrace();
         }
+    }
+    @Override
+    public void select() {
+        try {
+            stmt = connection.createStatement();
+            stmt.execute("SELECT * FROM people_info WHERE name = 'Sienna';");
+            stmt.close();
+        } catch (SQLException sqlExcept) {
+            sqlExcept.printStackTrace();
+        }
+
+    }
+    @Override
+    public void delete() {
+        try {
+            stmt = connection.createStatement();
+            stmt.execute("TRUNCATE TABLE people_info;");
+            stmt.close();
+        } catch (SQLException sqlExcept) {
+            sqlExcept.printStackTrace();
+        }
+
     }
 
     private void createConnection() {

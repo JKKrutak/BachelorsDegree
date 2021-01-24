@@ -29,12 +29,8 @@ public class CouchDbProfiler implements Profiler {
     public void insert(DataSet dataSet, String tableName){
 
         dbInstance = new StdCouchDbInstance(httpClient);
-        //db = new StdCouchDbConnector(database, dbInstance);
         db = new StdCouchDbConnector(database, dbInstance);
         db.createDatabaseIfNotExists();
-
-        User user = new User("1","ENODZIAŁA");
-        //db.create(UUID.randomUUID().toString(), user);
 
         for(int i = 1; i < dataSet.getSize()+1; i++) {
             Map<String, Object> referenceData = new HashMap<String, Object>();
@@ -45,15 +41,16 @@ public class CouchDbProfiler implements Profiler {
             referenceData.put("state", dataSet.getRandomStates()[i-1]);
             db.create(referenceData);
         }
+    }
 
+    @Override
+    public void select() {
+        db.getAsStream("Sienna");
+    }
 
-
-
-
-
-        //System.out.println(referenceData);
-       // db.create(referenceData);
-
+    @Override
+    public void delete() {
+        db.delete("people_info");
     }
 
 

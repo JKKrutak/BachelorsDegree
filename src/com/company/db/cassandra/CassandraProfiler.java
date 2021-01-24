@@ -23,17 +23,15 @@ public class CassandraProfiler implements Profiler {
     }
 
     @Override
-    public void select(String tableName) {
-        connection.query("");
+    public void select() {
+        connection.query("SELECT * FROM people.people_info where name ='Sienna'");
 
 
     }
 
     @Override
-    public void delete(String tableName) {
-
-
-
+    public void delete() {
+        connection.query("TRUNCATE people");
     }
 
 

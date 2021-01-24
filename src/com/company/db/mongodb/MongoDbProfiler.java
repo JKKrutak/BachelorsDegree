@@ -5,7 +5,10 @@ import com.company.model.DataSet;
 import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import org.bson.BsonDocument;
 import org.bson.Document;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.conversions.Bson;
 
 
 import java.util.LinkedList;
@@ -31,7 +34,6 @@ public class MongoDbProfiler implements Profiler {
     public void insert(DataSet dataSet, String tableName){
 
         Logger.getLogger("org.mongodb.driver").setLevel(Level.ALL);
-
         List<Document> listOfDocuments = new LinkedList<>(); // Linked lista gdyż ponieważ będzie szybsza
         for(int i = 0; i < dataSet.getSize(); i++) {
              Document document = new Document();
@@ -42,12 +44,23 @@ public class MongoDbProfiler implements Profiler {
 
              listOfDocuments.add(document);
         }
-
         collection.insertMany(listOfDocuments);
+    }
 
+    @Override
+    public void select() {
+        Document find = new Document().append("name","Sienna");
+        collection.find(find);
+        //List results = new ArrayList<>();
+        //collection.find(find).into(results);
+    }
 
+    @Override
+    public void delete() {
+        collection.drop();
 
     }
+
 
     public void closeConnection() {
 

@@ -33,6 +33,26 @@ public class MySqlProfiler implements Profiler {
         }
     }
 
+    @Override
+    public void select() {
+        try {
+            Statement stm = connection.createStatement();
+            stm.execute("SELECT * FROM people_info WHERE name = 'Sienna'");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void delete() {
+        try {
+            Statement stm = connection.createStatement();
+            stm.executeUpdate("TRUNCATE TABLE people_info");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void closeConnection() throws Exception{
         connection.close();
