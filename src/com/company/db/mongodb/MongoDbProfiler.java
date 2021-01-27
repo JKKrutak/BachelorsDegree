@@ -43,6 +43,7 @@ public class MongoDbProfiler implements Profiler {
              document.put("state", dataSet.getRandomStates()[i]);
 
              listOfDocuments.add(document);
+             //collection.insertOne(document);
         }
         collection.insertMany(listOfDocuments);
     }

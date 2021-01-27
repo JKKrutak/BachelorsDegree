@@ -9,7 +9,7 @@ import java.sql.*;
 public class DerbyProfiler implements Profiler {
 
     private static String dbURL = "jdbc:derby://localhost:1527/dbs;create=true";
-    private static String tableName = "restaurants";
+    private static String tableName = "people_info";
 
     // jdbc Connection
     private static Connection connection = null;
@@ -17,43 +17,49 @@ public class DerbyProfiler implements Profiler {
 
     public DerbyProfiler() throws SQLException {
         createConnection();
-        //connection.createStatement().execute("DROP TABLE people_info");
-        /*connection.createStatement().execute("CREATE TABLE people_info " +
+        connection.createStatement().execute("DROP TABLE people_info");
+        connection.createStatement().execute("CREATE TABLE people_info " +
                 "(" +
                 "name CHAR(120)," +
                 "secondname CHAR(120)," +
                 "age CHAR(120), " +
                 "state CHAR (120)" +
-                ")");*/
+                ")");
     }
 
     @Override
     public void insert(DataSet dataSet, String tableName) {
-        String query = new MySqlQueryCreator().mySqlInsert(dataSet, tableName);
-        try {
-            stmt = connection.createStatement();
-            stmt.execute(query.substring(0, query.length() - 1));
-            stmt.close();
-        } catch (SQLException sqlExcept) {
-            sqlExcept.printStackTrace();
+
+        for (int i = 0; i < dataSet.getSize(); i += 1000) {
+            DataSet rangeCopy = new DataSet(dataSet, i, i + 1000);
+            String query = new MySqlQueryCreator().mySqlInsert(rangeCopy, tableName);
+            try {
+                stmt = connection.createStatement();
+                stmt.execute(query.substring(0, query.length() - 1));
+                stmt.close();
+            } catch (SQLException sqlExcept) {
+                sqlExcept.printStackTrace();
+            }
         }
     }
+
     @Override
     public void select() {
         try {
             stmt = connection.createStatement();
-            stmt.execute("SELECT * FROM people_info WHERE name = 'Sienna';");
+            stmt.execute("SELECT * FROM people_info");
             stmt.close();
         } catch (SQLException sqlExcept) {
             sqlExcept.printStackTrace();
         }
 
     }
+
     @Override
     public void delete() {
         try {
             stmt = connection.createStatement();
-            stmt.execute("TRUNCATE TABLE people_info;");
+            stmt.execute("TRUNCATE TABLE people_info");
             stmt.close();
         } catch (SQLException sqlExcept) {
             sqlExcept.printStackTrace();

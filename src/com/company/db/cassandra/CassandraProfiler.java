@@ -19,22 +19,19 @@ public class CassandraProfiler implements Profiler {
         //query = "INSERT INTO people_info (";
         //System.out.println(query);
         connection.query(query);
-        connection.close();
     }
 
     @Override
     public void select() {
-        connection.query("SELECT * FROM people.people_info where name ='Sienna'");
-
-
+        connection.query("SELECT * FROM people.people_info where name = 'Sienna' ALLOW FILTERING");
     }
 
     @Override
     public void delete() {
-        connection.query("TRUNCATE people");
+        connection.query("TRUNCATE people.people_info");
     }
 
-
+    public void close() { connection.close(); }
 
 
 

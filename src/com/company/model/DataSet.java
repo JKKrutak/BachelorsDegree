@@ -1,4 +1,6 @@
 package com.company.model;
+import javax.xml.crypto.Data;
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -43,7 +45,7 @@ public class DataSet {
         return size;
     }
 
-    public DataSet(int size) {
+    public DataSet(int size, boolean randomize) {
         this.size = size;
         Random rand = new Random();
         randomNames = new String[size];
@@ -51,11 +53,27 @@ public class DataSet {
         randomAges = new int[size];
         randomStates = new String[size];
 
-        for(int i = 0; i < size; i++) {
-            randomNames[i] = names[rand.nextInt(names.length)];
-            randomSurrnames[i] = surrnames[rand.nextInt(surrnames.length)];
-            randomAges[i] = ages[rand.nextInt(ages.length)];
-            randomStates[i] = states[rand.nextInt(states.length)];
+        if (randomize) {
+            for (int i = 0; i < size; i++) {
+                randomNames[i] = names[rand.nextInt(names.length)];
+                randomSurrnames[i] = surrnames[rand.nextInt(surrnames.length)];
+                randomAges[i] = ages[rand.nextInt(ages.length)];
+                randomStates[i] = states[rand.nextInt(states.length)];
+            }
         }
+    }
+
+    public DataSet(DataSet dataSet, int from, int to) {
+        this.size = to - from;
+
+        randomNames = new String[size];
+        randomSurrnames = new String[size];
+        randomAges = new int[size];
+        randomStates = new String[size];
+
+        randomNames = Arrays.copyOfRange(dataSet.randomNames, from, to);
+        randomSurrnames = Arrays.copyOfRange(dataSet.randomSurrnames, from, to);
+        randomAges = Arrays.copyOfRange(dataSet.randomAges, from, to);
+        randomStates = Arrays.copyOfRange(dataSet.randomStates, from, to);
     }
 }
